@@ -76,16 +76,32 @@
                                         {{ name }}.setSelectionRange(0,0);
                                 }
                                 var notificationContainer = document.body.querySelector('#notifications');
-                                notificationContainer.innerHTML = "";
                                 setTimeout(()=>{
                                         notificationEl = document.createElement('div');
+                                        notificationEl.innerHTML = `
+                                        <div class="notification-inner">
+                                                <div class="notification-body">
+                                                        <div class="cp-icon notification-icon" aria-label="Success" role="img">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" focusable="false" aria-hidden="true"><!--! Font Awesome Pro 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2024 Fonticons, Inc. --><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>
+                                                        </div>
+                                                        <div class="notification-main">
+                                                                <div class="notification-message">Copied to clipboard.</div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        `;
                                         notificationContainer.append(notificationEl);
-                                        notificationEl.className = 'notification notice';
-                                        notificationEl.innerHTML = "Copied to clipboard";
+                                        notificationEl.className = 'notification';
+                                        notificationEl.dataset.type = "success";
                                         notificationEl.style.opacity = '1';
                                         notificationEl.style.display = 'block';
+                                        notificationEl.style.marginBottom = "0px";
                                         notificationEl.style.animation = 'readonlyNotification 300ms 2000ms ease-out forwards';
+                                        setTimeout(()=>{
+                                                notificationEl?.remove();
+                                        }, 2000);
                                 }, 150);
+                                {{ name }}?.blur();
                         });
                 }
         </script>
